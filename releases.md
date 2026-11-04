@@ -1,5 +1,9 @@
 # Releases
 
+## Unreleased
+
+- Derive the `base-security-audit` and `base-security-advisory` skill names from the package and filename, instead of repeating them in front matter. Installed names are unchanged.
+
 ## v0.1.1
 
 - Extend `base-security-advisory` with handling duplicate reports, batching several advisories into one release, the behavior of temporary private fork pull requests, consistent severity and credit types, embargoes, and updating release notes when a CVE is assigned.

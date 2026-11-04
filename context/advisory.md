@@ -1,5 +1,4 @@
 ---
-name: base-security-advisory
 description: Take a vulnerability from a private report or audit finding through a private fix, release, and published advisory, then record it in security/advisory-*.md. Use when triaging a security report, deciding whether a finding needs an advisory, preparing a vulnerability fix, or publishing and recording an advisory.
 metadata:
   type: skill
