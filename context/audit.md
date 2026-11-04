@@ -1,5 +1,4 @@
 ---
-name: base-security-audit
 description: Review project files for security issues and record the outcome in security/audit-*.md. Use when asked to audit or security-review files or a project, to find files that are due for review, or to record a security risk the maintainers accept.
 metadata:
   type: skill
