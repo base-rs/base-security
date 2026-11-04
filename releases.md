@@ -1,6 +1,6 @@
 # Releases
 
-## Unreleased
+## v0.1.1
 
 - Extend `base-security-advisory` with handling duplicate reports, batching several advisories into one release, the behavior of temporary private fork pull requests, consistent severity and credit types, embargoes, and updating release notes when a CVE is assigned.
 

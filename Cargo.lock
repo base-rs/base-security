@@ -151,7 +151,7 @@ dependencies = [
 
 [[package]]
 name = "base-security"
-version = "0.1.0"
+version = "0.1.1"
 
 [[package]]
 name = "base-security-bake"
