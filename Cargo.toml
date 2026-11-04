@@ -1,0 +1,22 @@
+[package]
+name = "base-security"
+version = "0.0.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/base-rs/base-security"
+description = "Security audit and advisory records, with agent skills for reviewing code and handling vulnerabilities"
+readme = "readme.md"
+include = ["src/**", "context/**", "Cargo.toml", "readme.md", "license.md", "releases.md"]
+
+[workspace]
+members = ["bake"]
+resolver = "3"
+
+[workspace.metadata.bake]
+manifest = "bake/Cargo.toml"
+
+[workspace.metadata.bake.release]
+reviewers = ["base-rs/maintainers"]
+
+[lib]
+name = "base_security"
