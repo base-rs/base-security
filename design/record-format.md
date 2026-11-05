@@ -2,7 +2,7 @@
 
 ## Requirement
 
-The `security/audit-{date}-{sha}.md` and `security/advisory-{date}-{slug}.md` formats must remain readable by simple line-oriented tools. An audit entry names one file and its outcome on a single line, with findings in a nested list using the fixed outcome forms. An advisory record carries its identifiers, package, severity, and version requirements in front matter.
+The `security/audit-{date}-{sha}.md` and `security/advisory-{date}-{slug}.md` formats must remain readable by simple line-oriented tools. An audit entry names one file and its outcome on a single line, with findings in a nested list using the fixed outcome forms. Adding an outcome form is additive: existing records remain valid, and tools that recognize the forms must be updated before records use the new one. An advisory record carries its identifiers, package, severity, and version requirements in front matter.
 
 Changing the filename pattern, entry wording, outcome forms, or front matter fields is a breaking change for projects that keep records. Such a change requires a migration path for existing records and a corresponding release note.
 

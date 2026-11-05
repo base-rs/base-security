@@ -67,7 +67,7 @@ Confirm a finding with a local failing test or reproduction where practical. Whe
 
 ## Classify findings
 
-A security finding is a weakness that lets an attacker affect confidentiality, integrity, or availability, given the project's trust boundaries. A defect without attacker leverage is an ordinary issue, not an audit finding. Record a hardening opportunity as a `low` finding only when it needs a decision; otherwise leave it out.
+A security finding is a weakness that lets an attacker affect confidentiality, integrity, or availability, given the project's trust boundaries. A defect without attacker leverage is an ordinary issue, not an audit finding. Record a hardening opportunity as a `low` finding only when it needs a decision; otherwise leave it out. When a plausible finding is ruled out only after investigation, record it as rejected rather than leaving it out, so the next reviewer does not repeat the investigation.
 
 Assign each finding a severity by its impact and how readily an attacker can trigger it, not by the effort to fix it:
 
@@ -78,7 +78,7 @@ Assign each finding a severity by its impact and how readily an attacker can tri
 
 Establish whether each finding affects a released version: reproduce it on the latest release of each supported version, or confirm that the vulnerable code is present in those release tags.
 
-Before reporting a finding, check whether it is already known: accepted in a `// SECURITY:` comment or design requirement, recorded in an earlier audit with an open issue, or the subject of an unpublished advisory, including draft advisories you can access. Do not report a known finding again unless its stated assumption no longer holds or its impact has changed; in that case, report it as a new finding that names the earlier one.
+Before reporting a finding, check whether it is already known: accepted or rejected in a `// SECURITY:` comment or design requirement, recorded in an earlier audit with an open issue, or the subject of an unpublished advisory, including draft advisories you can access. Do not report a known finding again unless its stated assumption or reasoning no longer holds or its impact has changed; in that case, report it as a new finding that names the earlier one.
 
 ## Decide each outcome
 
@@ -88,6 +88,7 @@ Each finding has one outcome:
 - **Fixed:** the weakness is fixed in a pull request. This suits code that has not been released, and released weaknesses below the advisory threshold.
 - **Accepted:** the maintainers decide not to fix it. Add a `// SECURITY:` comment where the risk lives, stating the assumption that makes it acceptable, so a later reviewer can tell whether it still holds. When the same assumption applies across the project, such as "configuration files are trusted", capture it once in `design/*.md` with `base-design-author`, and refer to it from the comments.
 - **Tracked:** the weakness remains open in a public issue. This suits only findings that the maintainers judge are not exploitable in released versions and are safe to discuss publicly.
+- **Rejected:** on investigation the finding is not a weakness: the attacker gains nothing they could not already do, or the behavior is correct given the project's semantics. Add a `// SECURITY:` comment where a reviewer would look, stating the reasoning that rules it out, so the next review does not report it again. An accepted finding is a weakness whose risk is tolerated under an assumption; a rejected finding is not a weakness, and the comment records why.
 
 Use the language's comment syntax, keeping the `SECURITY:` marker:
 
@@ -96,7 +97,12 @@ Use the language's comment syntax, keeping the `SECURITY:` marker:
 fn load_includes(path: &Path) -> Result<Configuration, Error> {
 ```
 
-Accepting a risk, choosing the advisory process, and opening a public issue are maintainer decisions. Propose an outcome with its evidence; do not choose one on the maintainers' behalf.
+```rust
+// SECURITY: Trailer fields are merged into the header map. This is not a smuggling vector: a field is only accepted as a trailer when its definition permits it, so it carries no meaning that depends on arriving before the body.
+fn read_trailers(&mut self, headers: &mut Headers) -> Result<(), Error> {
+```
+
+Accepting a risk, rejecting a finding, choosing the advisory process, and opening a public issue are maintainer decisions. Propose an outcome with its evidence; do not choose one on the maintainers' behalf.
 
 ## Record the audit
 
@@ -113,6 +119,7 @@ Revision: `fc81a68c1e2b5d0c9a7e4f3b2a1d0c9b8a7f6e5d` on `main`.
   - high: unbounded header count allows memory exhaustion; advisory GHSA-xxxx-xxxx-xxxx.
   - low: header count limit not applied to trailers; fixed in #61.
   - low: unbounded include depth; accepted, configuration is trusted (`// SECURITY:` at `load_includes`).
+  - medium: trailer fields merged into the header map; rejected, only fields whose definition permits trailers are accepted (`// SECURITY:` at `read_trailers`).
 - `src/request.rs` reviewed with no findings.
 ```
 
@@ -120,7 +127,8 @@ Follow this format exactly so the records remain searchable and machine-readable
 
 - List one entry per file, by path relative to the repository root, in byte order as `git ls-tree` lists them.
 - End each entry with either `reviewed with no findings.` or `reviewed with findings:` followed by a nested list.
-- Write each finding as `{severity}: {description}; {outcome}.`, where the outcome is `advisory {identifier}`, `fixed in #{number}`, `accepted, {reason}`, or `tracked in #{number}`. Do not use `; ` within the description.
+- Write each finding as `{severity}: {description}; {outcome}.`, where the outcome is `advisory {identifier}`, `fixed in #{number}`, `accepted, {reason}`, `tracked in #{number}`, or `rejected, {reason}`. Do not use `; ` within the description.
+- Give a rejected finding the severity it would have had if it were real, so the record shows what was ruled out.
 - Record a finding that spans files under the file where it is best fixed or explained, and name the other files in its description.
 - Keep the identifier an advisory had when the record merged; the advisory record lists its later aliases.
 

@@ -197,9 +197,15 @@ fn audit_examples_follow_the_record_format() {
                 let (_, outcome) = rest.split_once("; ").expect("finding has an outcome");
                 assert!(!outcome.contains("; "), "description contains `; `: {line}");
                 assert!(
-                    ["advisory ", "fixed in #", "accepted, ", "tracked in #"]
-                        .iter()
-                        .any(|form| outcome.starts_with(form)),
+                    [
+                        "advisory ",
+                        "fixed in #",
+                        "accepted, ",
+                        "tracked in #",
+                        "rejected, "
+                    ]
+                    .iter()
+                    .any(|form| outcome.starts_with(form)),
                     "{line}"
                 );
                 assert!(outcome.ends_with('.'), "{line}");
