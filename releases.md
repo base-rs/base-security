@@ -1,6 +1,6 @@
 # Releases
 
-## Unreleased
+## v0.2.0
 
 - Add the `rejected, {reason}` outcome to `base-security-audit` for findings that investigation rules out, recorded with a `// SECURITY:` comment so they are not reported again. Tools that validate outcome forms must accept the new form.
 - Derive the `base-security-audit` and `base-security-advisory` skill names from the package and filename, instead of repeating them in front matter. Installed names are unchanged.
