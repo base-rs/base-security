@@ -4,7 +4,7 @@ Security audit and advisory records for projects, captured in `security/` and ma
 
 ## Motivation
 
-"Review this file for security issues" is easy to ask and hard to track. Without a record, the same unchanged code is reviewed repeatedly, other code is never reviewed, and accepted risks are reported again by each new reviewer. Vulnerabilities need a careful path from private report to public advisory, without disclosing them before users can update.
+"Review this file for security issues" is easy to ask and hard to track. Without a record, the same unchanged code is reviewed repeatedly, other code is never reviewed, and accepted risks and rejected findings are reported again by each new reviewer. Vulnerabilities need a careful path from private report to public advisory, without disclosing them before users can update.
 
 `base-security` defines two kinds of tracked record. An audit records which files were reviewed at which revision, with an outcome for each finding, so the next audit can review only what changed. An advisory records a published vulnerability, with its identifiers and affected versions in front matter.
 
@@ -21,7 +21,7 @@ The install command is provided by `bake-agent-context`, which `base-project` in
 
 The package provides two self-contained skills:
 
-- [Security Audit](context/audit.md), installed as `base-security-audit`: find files that are due for review, review them against trust boundaries and common weaknesses, decide an outcome for each finding, and record the audit in `security/audit-{date}-{sha}.md`. Accepted risks are explained in `// SECURITY:` comments where they live, so later reviews do not report them again.
+- [Security Audit](context/audit.md), installed as `base-security-audit`: find files that are due for review, review them against trust boundaries and common weaknesses, decide an outcome for each finding, and record the audit in `security/audit-{date}-{sha}.md`. Accepted risks and rejected findings are explained in `// SECURITY:` comments where they live, so later reviews do not report them again.
 - [Security Advisory](context/advisory.md), installed as `base-security-advisory`: triage a report, prepare a fix privately, release it, publish the GitHub Security Advisory, and record it in `security/advisory-{date}-{slug}.md`.
 
 An audit record looks like this:
