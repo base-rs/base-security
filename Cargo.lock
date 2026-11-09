@@ -155,18 +155,18 @@ dependencies = [
  "bake-releases",
  "bake-test",
  "base-design",
- "base-security 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "base-security 0.2.0",
 ]
-
-[[package]]
-name = "base-security"
-version = "0.2.0"
 
 [[package]]
 name = "base-security"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0cafbfb3e7e5ce421ad36126cde1382cf6e5c994e17ca25701bc8a94fe24650e"
+
+[[package]]
+name = "base-security"
+version = "0.2.1"
 
 [[package]]
 name = "base-security-bake"
