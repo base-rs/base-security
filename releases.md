@@ -1,6 +1,6 @@
 # Releases
 
-## Unreleased
+## v0.2.1
 
 - Declare Rust 1.87, the Base default, as the minimum supported version in `rust-version`.
 
