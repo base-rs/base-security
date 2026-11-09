@@ -1,5 +1,9 @@
 # Releases
 
+## Unreleased
+
+- Declare Rust 1.87, the Base default, as the minimum supported version in `rust-version`.
+
 ## v0.2.0
 
 - Add the `rejected, {reason}` outcome to `base-security-audit` for findings that investigation rules out, recorded with a `// SECURITY:` comment so they are not reported again. Tools that validate outcome forms must accept the new form.
