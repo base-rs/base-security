@@ -2,6 +2,7 @@
 name = "base-security"
 version = "0.2.0"
 edition = "2024"
+rust-version = "1.87"
 license = "MIT"
 repository = "https://github.com/base-rs/base-security"
 description = "Security audit and advisory records, with agent skills for reviewing code and handling vulnerabilities"
